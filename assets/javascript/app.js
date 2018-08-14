@@ -48,7 +48,7 @@ makeButtons();
 
 //set up the api variables...
 // var superHero = $(this).attr("data-name");
-// var apiURL = "https://api.giphy.com/v1/gifs/search?api_key=Mr5kXQEuNzkffeYSQKuT1dD4VhcU5vAP&q=" + superHero + "&limit=10";
+// var apiURL = "https://api.giphy.com/v1/gifs/search?api_key=Mr5kXQEuNzkffeYSQ...=" + superHero + "&limit=10";
 
 //establish jax with giphy api...
 // $.ajax({
