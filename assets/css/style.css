@@ -1,0 +1,27 @@
+* {
+    box-sizing: border-box;
+}
+
+.container{
+    background-color: rgba(0, 0, 255, 0.474);
+}
+
+h1 {
+    text-align: center;
+}
+
+#heroButton{
+    text-align: center;
+}
+
+.supHeroBtn {
+    margin: 5px;
+    float: center;
+    border-radius: 15%;
+}
+
+label {
+    border:solid 2px black;
+    background-color: snow;
+    padding: 3px;
+}
