@@ -41,39 +41,72 @@ $("#addHero").on("click", function(event) {
 
     // call makeButtons which handles the topics array
     makeButtons();
+    $("#heroInput").val("");
 });
 
 // Call the makeButton(); to display items currently in array...
-makeButtons();
+    makeButtons();
 
-//set up the api variables...
-// var superHero = $(this).attr("data-name");
-// var apiURL = "https://api.giphy.com/v1/gifs/search?api_key=Mr5kXQEuNzkffeYSQKuT1dD4VhcU5vAP&q=" + superHero + "&limit=10";
+function getGif() {
 
-//establish jax with giphy api...
-// $.ajax({
-//     url: apiURL,
-//     method: "GET"
-// }).then(function(response){
-//     console.log(response);
-// })
+    //set up the api variables...
+    var superHero = $(this).attr("data-name");
+    var apiURL = "https://api.giphy.com/v1/gifs/search?q=" + superHero + "&api_key=Mr5kXQEuNzkffeYSQKuT1dD4VhcU5vAP&limit=10";
+
+    //establish jax with giphy api...
+    $.ajax({
+    url: apiURL,
+    method: "GET"
+    }).then(function(response) {
+    
+    var results = response.data;
+    console.log(results);
+        for(i = 0; i < results.length; i++) {
+
+            if(results[i].rating !== "r") {
+            
+                var gifDiv = $("<div>");
+                    gifDiv.addClass("gif")
+    
+                var heroIMG = $("<img>");
+
+                heroIMG.attr("src", results[i].images.fixed_height_still.url);
+
+                heroIMG.attr("data-still", results[i].images.fixed_height_still.url)
+
+                heroIMG.attr("data-animate", results[i].images.fixed_height.url)
+
+                heroIMG.attr("data-state", "still")
+                heroIMG.addClass("img")
+
+                var rating = results[i].rating;
+                var p = $("<p>").text("This Gif is Rated: " + rating);
+                p.addClass("rating")
+
+                gifDiv.append(heroIMG);
+                gifDiv.append(p);
+
+                $("#heroDump").prepend(gifDiv);
+        }
+
+    }
+});
+
+};
+
+$(document).on("click", ".img", function () {
+    var state = $(this).attr("data-state");
+    if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"))
+        $(this).attr("data-state", "playing")
+    } else {
+        $(this).attr("src", $(this).attr("data-still"))
+        $(this).attr("data-state", "still")
+    }
+});
+
+$(document).on("click", ".supHeroBtn", getGif);
 
 
-//when the user clicks a button it grabs 10 random gifs about that character...
 
-//$('#buttonID').on('click', //finish this);
-
-//we need a static pic at first...
-
-//when user clicks on the gif it animates...
-
-//when the user clicks on the gif again it goes back to the still photo...
-
-//every gif needs to display the rating and show on html...
-
-//ad a formk that allows for people to add their own gif ideas..
-
-//the submit button will create a new button for the user to click...
-
-
-
+  
